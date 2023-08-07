@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from './store';
 
 export function Contacts() {
-  const contacts = useSelector(state => state.contacts.items);
+  const contactsUser = useSelector(state => state.contacts.items);
   const dispatch = useDispatch();
   const onDeleteContact = id => {
     dispatch(deleteContact(id));
@@ -11,7 +11,7 @@ export function Contacts() {
     <div>
       <h2>Contacts</h2>
       <ul>
-        {contacts.map(({ name, number, id }) => (
+        {contactsUser.map(({ name, number, id }) => (
           <li key={id}>
             {name}: {number}
             {'  '}
