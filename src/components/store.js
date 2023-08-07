@@ -19,9 +19,10 @@ export const contactsSlice = createSlice({
       );
     },
     filterContact(state, action) {
-      state.filter = action.payload;
+      state.filter = action.payload.toLowerCase();
+
       state.items = state.items.filter(contact =>
-        contact.name.includes(state.filter)
+        contact.name.toLowerCase().includes(state.filter)
       );
     },
   },
@@ -34,42 +35,3 @@ export const store = configureStore({
 });
 export const { addContact, deleteContact, filterContact } =
   contactsSlice.actions;
-
-// const state = {
-//   contacts: [],
-//   filter: '',
-// };
-
-// const sliceNewContact = createSlice({
-//   name: 'newContact',
-//   initialState: {},
-//   reducers: {
-//     increment(state, action) {
-//       state.nameUser = action.payload;
-//     },
-//   },
-// });
-
-// export const store = configureStore({
-//   reducer: {
-//     Contacts: sliceContacts.reducer,
-//     newContact: sliceNewContact.reducer,
-//   },
-// });
-
-// export const { increment } = sliceNewContact.actions;
-// const sliceContacts = createSlice({
-//   name: 'Contacts',
-//   initialState: [],
-//   reducers: {
-//     myContacts(state, action) {
-//     state.contacts = [ useSelector(newContact.state), ...state],
-//     }
-//   }
-// })
-
-// export const itemsReducer = createReducer([], {
-//   [add]: (state, action) => [...state, action.payload],
-//   //   [add]: (state, action) => state.push(action.payload),
-//   [remove]: (state, action) => state.filter(item => item.id !== action.payload),
-// });

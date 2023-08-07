@@ -1,4 +1,3 @@
-// import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { filterContact } from './store';
 
@@ -6,7 +5,8 @@ export const Filter = () => {
   const dispatch = useDispatch();
 
   const onChange = evt => {
-    dispatch(filterContact(evt.currentTarget.elements.filter.value));
+    dispatch(filterContact(evt.currentTarget.value));
+    console.log(evt.currentTarget.value);
   };
   return (
     <div
@@ -31,8 +31,3 @@ export const Filter = () => {
     </div>
   );
 };
-
-// Filter.propTypes = {
-//   value: PropTypes.string.isRequired,
-//   onChange: PropTypes.func.isRequired,
-// };

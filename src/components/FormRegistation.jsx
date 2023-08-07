@@ -1,12 +1,13 @@
 // import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from './store';
 import { nanoid } from '@reduxjs/toolkit';
 
 export default function FormRegistation() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const contacts = useSelector(state => state.contacts.items);
   const dispatch = useDispatch();
   const handleInputChange = evt => {
     const { name, value } = evt.target;
@@ -25,6 +26,15 @@ export default function FormRegistation() {
 
   const handleSubmit = evt => {
     evt.preventDefault();
+    if (
+      contacts.find(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
     dispatch(
       addContact({
         name: name,
