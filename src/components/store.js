@@ -1,37 +1,25 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
-
-export const contactsSlice = createSlice({
-  name: 'contacts',
-  initialState: {
-    items: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    ],
-    filter: '',
-  },
-  reducers: {
-    addContact(state, action) {
-      state.items.push(action.payload);
-    },
-    deleteContact(state, action) {
-      state.items = state.items.filter(
-        contact => contact.id !== action.payload
-      );
-    },
-    filterContact(state, action) {
-      state.filter = action.payload.toLowerCase();
-
-      state.items = state.items.filter(contact =>
-        contact.name.toLowerCase().includes(state.filter)
-      );
-    },
-  },
-});
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore } from 'redux-persist';
+import {
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import { persistedContacts } from './createSlice';
 
 export const store = configureStore({
   reducer: {
-    contacts: contactsSlice.reducer,
+    contacts: persistedContacts,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
-export const { addContact, deleteContact, filterContact } =
-  contactsSlice.actions;
+
+export const persistor = persistStore(store);

@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from './store';
+import { deleteContact, getContacts } from './createSlice';
 
 export function Contacts() {
-  const contactsUser = useSelector(state => state.contacts.items);
+  const contactsUser = useSelector(getContacts);
   const dispatch = useDispatch();
   const onDeleteContact = id => {
     dispatch(deleteContact(id));
