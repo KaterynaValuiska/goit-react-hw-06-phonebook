@@ -1,13 +1,13 @@
 // import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact, getContacts } from './createSlice';
+import { addContact } from './createSlice';
 import { nanoid } from '@reduxjs/toolkit';
 
 export default function FormRegistation() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(state => state.contacts.items);
   const dispatch = useDispatch();
   const handleInputChange = evt => {
     const { name, value } = evt.target;

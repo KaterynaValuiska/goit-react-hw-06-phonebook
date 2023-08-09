@@ -6,7 +6,6 @@ export const Filter = () => {
 
   const onChange = evt => {
     dispatch(filterContact(evt.currentTarget.value));
-    console.log(evt.currentTarget.value);
   };
   return (
     <div

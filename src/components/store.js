@@ -23,3 +23,10 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+// якщо не потрібно записувати в локал сторіч використовувати це (прибрати все з персістом):
+// export const store = configureStore({
+//   reducer: {
+//     contacts: contactsSlice.reducer,
+//   },
+// });

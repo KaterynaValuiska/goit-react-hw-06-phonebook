@@ -23,9 +23,9 @@ const contactsSlice = createSlice({
     filterContact(state, action) {
       state.filter = action.payload.toLowerCase();
 
-      state.items = state.items.filter(contact =>
-        contact.name.toLowerCase().includes(state.filter)
-      );
+      //   state.items = state.items.filter(contact =>
+      //     contact.name.toLowerCase().includes(state.filter)
+      //   );
     },
   },
 });
@@ -33,14 +33,14 @@ const contactsSlice = createSlice({
 export const { addContact, deleteContact, filterContact } =
   contactsSlice.actions;
 
+// прибрати якщо не потрібно зберігати в локал сторіч
 const persistConfig = {
   key: 'contacts',
   storage,
   whitelist: ['items'],
 };
+
 export const persistedContacts = persistReducer(
   persistConfig,
   contactsSlice.reducer
 );
-
-export const getContacts = state => state.contacts.items;
