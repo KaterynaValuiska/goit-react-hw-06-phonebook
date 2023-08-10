@@ -44,3 +44,5 @@ export const persistedContacts = persistReducer(
   persistConfig,
   contactsSlice.reducer
 );
+
+// https://64d38f5967b2662bf3dc6c98.mockapi.io/contacts
